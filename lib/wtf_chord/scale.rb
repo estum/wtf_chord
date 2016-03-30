@@ -1,6 +1,6 @@
 require 'wtf_chord/note'
 require 'wtf_chord/pitch'
-require 'wtf_chord/fingerboard'
+require 'wtf_chord/fretboard'
 
 module WTFChord
   class ScaleArray < Array
@@ -63,5 +63,5 @@ module WTFChord
     ScaleArray.build(*chromatic_scale).freeze
   end
 
-  GUITAR ||= Fingerboard.new(*%w(E2 A2 D3 G3 B3 E4))
+  GUITAR ||= Fretboard.new(*%w(E2 A2 D3 G3 B3 E4))
 end

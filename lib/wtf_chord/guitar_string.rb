@@ -48,6 +48,14 @@ module WTFChord
       dead? ? -1 : to_i
     end
 
+    def <=> other
+      return if dead?
+      case other
+      when Integer      then @fret <=> other
+      when GuitarString then @fret <=> other.fret
+      end
+    end
+
     private
 
     def calculate_note!

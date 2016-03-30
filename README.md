@@ -1,8 +1,13 @@
-# WTFChord
+# WTF Chord?
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/wtf_chord`. To experiment with that code, run `bin/console` for an interactive prompt.
+‘WTF Chord?’ is the Ruby guitar chords generator library & cli tool, which also contains some abstraction for musical mathematics. Chords generator is a common but a not only mission, the library is ready for extending for generating scales.
 
-TODO: Delete this and the text above, and describe your gem
+Some features:
+
+* Tones math methods.
+* Finding chords by names with many variants of fingering.
+* CLI tool `wtfchord` to quickly find chord and draw it's fingerings to your terminal.
+* Extendable rules (pending).
 
 ## Installation
 
@@ -20,9 +25,35 @@ Or install it yourself as:
 
     $ gem install wtf_chord
 
-## Usage
+## CLI-tool usage
 
-    $ wtfchord F#dim
+For example, to print two fingering variants of the `Dm` chord, just run:
+
+    $ wtfchord Dm 2
+
+And you'll get the visual presentation of chords' fingerings:
+
+    [ ×  ×  0  2  3  1 ]
+     ––––––––––––––––––
+      |  |  |  |  |  •
+      |  |  |  •  |  |
+      |  |  |  |  •  |
+      |  |  |  |  |  |
+      |  |  |  |  |  |
+      |  |  |  |  |  |
+     ––––––––––––––––––
+            D  A  D  F
+
+    [ ×  5  7  7  6  5 ]
+     ––––––––––––––––––
+      |  •  |  |  |  •    V
+      |  |  |  |  •  |
+      |  |  •  •  |  |
+      |  |  |  |  |  |
+      |  |  |  |  |  |
+      |  |  |  |  |  |
+     ––––––––––––––––––
+         D  A  D  F  A
 
 ## Development
 
@@ -32,5 +63,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wtf_chord.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/estum/wtf_chord.

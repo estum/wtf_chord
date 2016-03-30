@@ -1,3 +1,5 @@
+require 'wtf_chord/fingering'
+
 module WTFChord
   class Chord
     MAX_DIST = 5
@@ -19,38 +21,46 @@ module WTFChord
     def fingerings(limit = 3)
       list = []
       (0..MAX_FRET).each do |from_fret|
-        fingering = get_fingering(from_fret)
-
-        next if list.include?(fingering)
-
-        if all_notes?(fingering.used_strings)
-          list << fingering
-        end
+        f = get_fingering(from_fret)
+        next if list.include?(f)
+        list << f if all_notes?(f.used_strings)
       end
 
       list.sort_by!(&:complexity)[0...limit].sort_by!(&:min_fret)
     end
 
-    def draw_fingerings(limit = 3)
-      puts (fingerings(limit).map(&:draw) * "\n\n")
-    end
-
     def get_fingering(from_fret = 0)
-      GUITAR.dup.tap do |guitar|
-        guitar.strings.each do |s|
-          fret = (from_fret..(from_fret+MAX_DIST)).detect { |dist| @notes.include?((s.original + dist).note) }
+      to_fret = from_fret + MAX_DIST
+      Fingering.new(GUITAR) do |f|
+        f.strings.each do |s|
+          fret = (from_fret..to_fret).detect { |dist| @notes.include?((s.original + dist).note) }
           fret ? s.hold_on(fret) : s.dead
         end
 
-        while guitar.used_strings[0] && guitar.used_strings[0].note != @notes[0]
-          guitar.used_strings.detect { |x| !x.dead? && x.note != @notes[0] }&.dead
-        end
+        adjust_fingering(f.used_strings[0], to_fret, 0) while should_adjust?(f.used_strings[0], 0)
       end
     end
 
     def all_notes?(strings)
       snotes = strings.map(&:note).tap(&:uniq!)
       @notes.all? { |n| snotes.include?(n) }
+    end
+
+    def adjust_fingering(string, to_fret, i = 0)
+      while string.fret < to_fret.pred
+        string.hold_on(string.fret + 1)
+        break if @notes.include?(string.note)
+      end
+
+      string.dead if !string.dead? && string.note != @notes[i]
+    end
+
+    def should_adjust?(string, i = 0)
+      string && string.note != @notes[i]
+    end
+
+    def draw_fingerings(limit = 3)
+      puts (fingerings(limit).map(&:draw) * "\n\n")
     end
   end
 end

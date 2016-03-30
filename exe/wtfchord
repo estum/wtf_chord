@@ -5,4 +5,7 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 require 'rubygems' unless Object.const_defined?(:Gem)
 require "wtf_chord"
 
-WTFChord.chord(ARGV[0]).draw_fingerings(ARGV[1]&.to_i || 3)
+chord = WTFChord.chord(ARGV[0])
+
+puts chord.inspect, nil
+chord.draw_fingerings(ARGV[1]&.to_i || 3)

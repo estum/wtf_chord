@@ -1,6 +1,8 @@
 # coding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require 'wtf_chord/version'
 
 Gem::Specification.new do |spec|
@@ -9,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Anton"]
   spec.email         = ["anton.estum@gmail.com"]
 
-  spec.summary       = %q{WTF Chord? is a Ruby Gem for generating guitar chords.}
-  spec.description   = %q{WTF Chord? provides the library and CLI-tool for generating guitar chords.}
+  spec.summary       = %q{‘WTF Chord?’ is the Ruby guitar chords generator library.}
+  spec.description   = %q{‘WTF Chord?’ is the Ruby guitar chords generator library.}
   spec.homepage      = "https://github.com/estum/wtf_chord"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
