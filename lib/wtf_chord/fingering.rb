@@ -1,6 +1,6 @@
 require 'wtf_chord/fretboard'
 require 'wtf_chord/complexity_counter'
-require 'wtf_chord/drawer'
+require 'wtf_chord/formatter'
 
 module WTFChord
   class Fingering < Fretboard
@@ -23,7 +23,7 @@ module WTFChord
     end
 
     def draw
-      Drawer.new(self).draw
+      Formatter.new(:default).call(self)
     end
 
     def set_fingers(fingers)

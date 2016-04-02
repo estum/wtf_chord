@@ -20,13 +20,14 @@ module WTFChord
 
     def fingerings(limit = 3)
       list = []
+
       (0..MAX_FRET).each do |from_fret|
         f = get_fingering(from_fret)
         next if list.include?(f)
         list << f if all_notes?(f.used_strings)
       end
 
-      list.sort_by!(&:complexity)[0...limit].sort_by!(&:min_fret)
+      sort_fingerings(list, limit)
     end
 
     def get_fingering(from_fret = 0)
@@ -59,8 +60,9 @@ module WTFChord
       string && string.note != @notes[i]
     end
 
-    def draw_fingerings(limit = 3)
-      puts (fingerings(limit).map(&:draw) * "\n\n")
+    def sort_fingerings(list, limit)
+      list.sort_by!(&:complexity)
+      list[0...limit].sort_by!(&:min_fret)
     end
   end
 end

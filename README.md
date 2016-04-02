@@ -27,9 +27,31 @@ Or install it yourself as:
 
 ## CLI-tool usage
 
+    Usage: wtfchord [options] name
+
+    Finds fingerings of the requested chord.
+
+    v0.2.0
+
+    Options:
+        -h, --help                       Show command line help
+            --version                    Show help/version info
+        -n, --amount N                   Amount of fingering variants to output.
+                                         (default: 3)
+        -o, --output FORMAT              Output format.
+                                         (default: default)
+            --log-level LEVEL            Set the logging level
+                                         (debug|info|warn|error|fatal)
+                                         (Default: info)
+
+    Arguments:
+
+        name
+            Chord name to find.
+
 For example, to print two fingering variants of the `Dm` chord, just run:
 
-    $ wtfchord Dm 2
+    $ wtfchord Dm -n 2
 
 And you'll get the visual presentation of chords' fingerings:
 
@@ -54,6 +76,19 @@ And you'll get the visual presentation of chords' fingerings:
       |  |  |  |  |  |
      ––––––––––––––––––
          D  A  D  F  A
+
+You can get simpler output, using the `--output` option:
+
+    $ wtfchord Dm -n 10 --output=simple
+    Dm (D - F - A)
+
+    [ × × 0 2 3 1 ]
+    [ × 5 3 2 3 1 ]
+    [ × 5 3 2 3 5 ]
+    [ × 5 3 7 3 5 ]
+    [ × 5 7 7 6 5 ]
+    [ 10 8 7 7 6 10 ]
+    [ 10 8 7 7 10 10 ]
 
 ## Development
 
