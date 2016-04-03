@@ -15,7 +15,11 @@ module WTFChord
     end
 
     def == other
-      other.is_a?(Fingering) ? other.code == code : super
+      case other
+      when Fingering then other.code == code
+      when Array     then other == @strings.map(&:fret)
+      else super
+      end
     end
 
     def complexity

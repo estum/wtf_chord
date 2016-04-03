@@ -1,21 +1,25 @@
 require 'spec_helper'
 
 describe WTFChord::Pitch do
-  let(:pitch) { WTFChord.note("A5") }
+  shared_examples "for a note" do |name, pitch, operations|
+    context "A pitch ‘#{name}’" do
+      subject { WTFChord.note(name) }
 
-  describe '#to_i' do
-    it { expect(pitch.to_i).to eq 70 }
+      it { is_expected.to eq pitch }
+
+      describe "#to_s" do
+        it { expect(subject.to_s).to eq name }
+      end
+
+      operations.each do |change, note|
+        it "#{change > 0 ? '+' : '-'} #{change.abs} = #{note}" do
+          expect(subject + change).to eq note
+        end
+      end
+    end
   end
 
-  describe '#+' do
-    it { expect(pitch + 1).to eq 'Bb5' }
-    it { expect(pitch + 2).to eq 'B5' }
-    it { expect(pitch + 3).to eq 'C6' }
-  end
-
-  describe '#-' do
-    it { expect(pitch - 1).to eq 'G#5' }
-    it { expect(pitch - 9).to eq 'C5' }
-    it { expect(pitch - 10).to eq 'B4' }
-  end
+  include_examples "for a note", "A5", 70,
+    1  => 'Bb5', 2  => 'B5', 3   => 'C6',
+    -1 => 'G#5', -9 => 'C5', -10 => 'B4'
 end
