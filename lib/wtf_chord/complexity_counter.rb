@@ -6,15 +6,17 @@ module WTFChord
 
     def rate
       frets = @fingering.holded_strings.map(&:fret)
-      barre = frets.uniq.keep_if { |o| frets.count(o) > 3 }.max
+      barre = frets.uniq.keep_if { |o| frets.count(o) >= 2 }.min
       barre_strings = barre ? frets.count(barre).pred : 0
 
-      base_rate = (
-        Rational(holded_strings - barre_strings, total_strings) +
-        Rational(finger_dist(frets), 5)
-      ).to_f
+      base_rate = begin
+        Rational(holded_strings - barre_strings, 6).to_f +
+        Rational(finger_dist(frets), 5).to_f
+      end
 
-      base_rate += 1 if complex_barre?(barre, frets)
+      # p [@fingering, holded_strings, barre_strings]
+
+      base_rate += 1 if (barre_strings > 2 || frets.uniq.size > 3) && complex_barre?(barre, frets)
 
       base_rate
     end
