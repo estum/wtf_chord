@@ -23,7 +23,9 @@ module WTFChord
       name.match(pattern) do |m|
         base = chords[m[:name]] || chords["M"]
         steps.concat(base)
-        steps.concat(extra[m[:ext]]) if m[:ext] && m[:ext].length <= (6 - steps.length)
+
+        ext = extra[m[:ext]] if m[:ext]
+        steps.concat(ext) if ext
       end
 
       steps.tap(&:uniq!)

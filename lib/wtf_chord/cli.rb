@@ -31,7 +31,7 @@ module WTFChord
     ##
     # Options
     #
-    options['amount'] = 3
+    options['amount'] = 5
     options['output'] = 'default'
     options['rates']  = false
 

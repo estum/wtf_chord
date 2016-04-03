@@ -25,8 +25,9 @@ module WTFChord
 
     def == other
       case other
-      when String        then other.casecmp(@key).zero?
-      when Integer, Note then other == @position
+      when String  then other.casecmp(@key).zero?
+      when Integer then other == @position
+      when Note    then other.position == @position
       end
     end
 
