@@ -31,7 +31,7 @@ Or install it yourself as:
 
     Finds fingerings of the requested chord.
 
-    v0.2.0
+    v0.2.1
 
     Options:
         -h, --help                       Show command line help
@@ -40,6 +40,7 @@ Or install it yourself as:
                                          (default: 3)
         -o, --output FORMAT              Output format.
                                          (default: default)
+        -R, --[no-]rates                 Output fingering complexity rates
             --log-level LEVEL            Set the logging level
                                          (debug|info|warn|error|fatal)
                                          (Default: info)
