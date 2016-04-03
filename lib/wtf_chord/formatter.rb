@@ -2,13 +2,16 @@ require 'wtf_chord/formatters/base'
 
 module WTFChord
   class Formatter
-    def initialize(name)
+    def initialize(name, with_rates = false)
       @name = name
+      @with_rates = with_rates
       require_formatter! unless formatter?
     end
 
     def call(*fingerings)
-      puts (fingerings.map(&formatter) * formatter.separator)
+      formatter.with_rates(@with_rates) do |f|
+        puts (fingerings.map(&f) * f.separator)
+      end
     end
 
     alias :[] :call

@@ -18,7 +18,7 @@ module WTFChord
           " #{border}",
           *fret_rows,
           " #{border}",
-          "  #{string_keys}"
+          "  #{string_keys}#{rate}"
         ] * NEWLINE
       end
 
@@ -30,6 +30,10 @@ module WTFChord
 
       def capo
         "  (capo #{to_latin @fret.capo})" if @fret.capo > 0
+      end
+
+      def rate
+        "  (complexity: %.2f)" % @fret.complexity if with_rates?
       end
 
       def border

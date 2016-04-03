@@ -2,7 +2,7 @@ module WTFChord
   module Formatters
     class Simple < Base
       def draw
-        "[ #{@fret.fingers * " "} ]"
+        "[ #{@fret.fingers * " "} ]#{rate}"
       end
     end
   end
