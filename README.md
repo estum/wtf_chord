@@ -31,13 +31,13 @@ Or install it yourself as:
 
     Finds fingerings of the requested chord.
 
-    v0.2.1
+    v0.3.1
 
     Options:
         -h, --help                       Show command line help
             --version                    Show help/version info
         -n, --amount N                   Amount of fingering variants to output.
-                                         (default: 3)
+                                         (default: 5)
         -o, --output FORMAT              Output format.
                                          (default: default)
         -R, --[no-]rates                 Output fingering complexity rates
@@ -57,25 +57,25 @@ For example, to print two fingering variants of the `Dm` chord, just run:
 And you'll get the visual presentation of chords' fingerings:
 
     [ ×  ×  0  2  3  1 ]
-     ––––––––––––––––––
-      |  |  |  |  |  •
-      |  |  |  •  |  |
-      |  |  |  |  •  |
+     ——————————————————
+      |  |  |  |  |  ◉
+      |  |  |  ◉  |  |
+      |  |  |  |  ◉  |
       |  |  |  |  |  |
       |  |  |  |  |  |
       |  |  |  |  |  |
-     ––––––––––––––––––
+     ——————————————————
             D  A  D  F
 
     [ ×  5  7  7  6  5 ]
-     ––––––––––––––––––
-      |  •  |  |  |  •    V
-      |  |  |  |  •  |
-      |  |  •  •  |  |
+     ——————————————————
+      |  ◉  |  |  |  ◉   ← V
+      |  |  |  |  ◉  |
+      |  |  ◉  ◉  |  |
       |  |  |  |  |  |
       |  |  |  |  |  |
       |  |  |  |  |  |
-     ––––––––––––––––––
+     ——————————————————
          D  A  D  F  A
 
 You can get simpler output, using the `--output` option:
