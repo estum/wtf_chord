@@ -9,19 +9,21 @@ module WTFChord
     end
 
     def call(*fingerings)
-      formatter.with_rates(@with_rates) do |f|
-        puts (fingerings.map(&f) * f.separator)
-      end
+      formatter.with_rates(@with_rates) { |f| fingerings.map(&f) }
     end
 
     alias :[] :call
 
+    def separator
+      formatter.separator
+    end
+
     def formatter
-      WTFChord::Formatters.const_get(formatter_name)
+      Formatters.const_get(formatter_name)
     end
 
     def formatter?
-      WTFChord::Formatters.const_defined?(formatter_name)
+      Formatters.const_defined?(formatter_name)
     end
 
     def formatter_name

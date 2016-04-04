@@ -14,7 +14,7 @@ module WTFChord
       debug { "Output using formatter: #{formatter.formatter.to_s}\n" }
 
       puts chord.inspect, nil
-      formatter.(*fingerings)
+      puts formatter[*fingerings] * formatter.separator
     end
 
     version VERSION
