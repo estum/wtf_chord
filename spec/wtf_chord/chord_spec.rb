@@ -24,14 +24,21 @@ describe WTFChord::Chord do
   include_examples "for a chord",
     "Em" => {
       :steps      => [0, 3, 7],
-      :notes      => ["E", "G", "B"],
+      :notes      => %w(E G B),
       :fingerings => [[0, 2, 2, 0, 0, 0],
                       [nil, nil, 2, 4, 5, 3]]
     },
     "D7" => {
       :steps => [0, 4, 7, 10],
-      :notes => ["D", "F#", "A", "C"],
+      :notes => %w(D F# A C),
       :fingerings => [[nil, nil, 0, 2, 1, 2],
                       [nil, 5, 7, 5, 7, 5]]
+    },
+    "B7" => {
+      :steps => [0, 4, 7, 10],
+      :notes => %w(B D# F# A),
+      :fingerings => [[nil, 2, 1, 2, 0, 2],
+                      [nil, 2, 4, 2, 4, 2],
+                      [  7, 9, 7, 8, 7, 7]]
     }
 end

@@ -51,7 +51,10 @@ module WTFChord
 
       !fingerings.include?(variant) &&
       basetone?(used_strings[0]) &&
-      (third?(used_strings[1]) || third?(used_strings[2])) &&
+      (
+        (third?(used_strings[1]) || third?(used_strings[2])) ||
+        (last?(used_strings[1]) || last?(used_strings[2]))
+      ) &&
       all_notes?(used_notes) &&
       used_notes.each_cons(2).none? { |(l, r)| l == r } &&
       tones_count.all? { |n| tones_count[0] >= n || tones_count[notes.index(third_tone)] >= n } &&
@@ -80,6 +83,10 @@ module WTFChord
 
     def third?(string)
       string && (string.note == third_tone)
+    end
+
+    def last?(string)
+      string && (string.note == notes[-1])
     end
   end
 end
