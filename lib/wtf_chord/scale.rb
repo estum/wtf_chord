@@ -63,5 +63,11 @@ module WTFChord
     ScaleArray.build(*chromatic_scale).freeze
   end
 
-  GUITAR ||= Fretboard.new(*%w(E2 A2 D3 G3 B3 E4))
+  def self.guitar=(guitar)
+    Thread.current[:wtf_guitar] = guitar
+  end
+
+  def self.guitar
+    Thread.current[:wtf_guitar] ||= Fretboard.new(*%w(E2 A2 D3 G3 B3 E4))
+  end
 end

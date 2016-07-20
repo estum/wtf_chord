@@ -26,18 +26,16 @@ module WTFChord
     private
 
     def generate(fret_range)
-      combinations = GUITAR.strings.map.with_index do |s, index|
-        fret_range.select do |dist|
-          pitch = s.original + dist
-          has_note?(pitch)
-        end.tap do |frets|
-          frets << nil if frets.size == 0
-        end
+      combinations = WTFChord.guitar.strings.map.with_index do |s, index|
+        fret_range.
+          select { |dist| pitch = s.original + dist; has_note?(pitch) }.
+          tap    { |frets| frets << nil if frets.size == 0 }
       end
 
       combinations.inject(&:product).each do |fingers|
         fingers.flatten!
-        Fingering.new(GUITAR, fingers) do |variant|
+
+        Fingering.new(WTFChord.guitar, fingers) do |variant|
           adjust(variant)
           yield(variant)
         end

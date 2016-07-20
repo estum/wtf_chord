@@ -7,14 +7,13 @@ module WTFChord
     include Methadone::CLILogging
 
     main do |name|
-      chord      = WTFChord.chord(name)
-      fingerings = chord.fingerings(options['amount'])
-      formatter  = WTFChord::Formatter.new(options['output'], options['rates'])
+      chord     = WTFChord.chord(name)
+      formatter = WTFChord::Formatter.new(options['output'], options['rates'])
 
       debug { "Output using formatter: #{formatter.formatter.to_s}\n" }
 
       puts chord.inspect, nil
-      puts formatter[*fingerings] * formatter.separator
+      puts formatter[*chord.fingerings(options['amount'])] * formatter.separator
     end
 
     version VERSION

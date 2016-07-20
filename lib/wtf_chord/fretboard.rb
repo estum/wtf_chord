@@ -23,6 +23,14 @@ module WTFChord
       self
     end
 
+    def with_capo(capo)
+      capo_was = @capo
+      set_capo(capo)
+      yield
+    ensure
+      set_capo(capo_was)
+    end
+
     def fingers
       @strings.map { |string| string.dead? ? DEAD : string.fret  }
     end
