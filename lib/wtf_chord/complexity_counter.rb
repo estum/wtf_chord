@@ -28,7 +28,7 @@ module WTFChord
         end
       end
 
-      base_rate
+      base_rate + @fingering.extra_complexity
     end
 
     private

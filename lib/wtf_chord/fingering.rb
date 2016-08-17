@@ -4,9 +4,12 @@ require 'wtf_chord/formatter'
 
 module WTFChord
   class Fingering < Fretboard
+    attr_accessor :extra_complexity
+
     def initialize(guitar, fingers = nil)
       @capo      = guitar.capo
       @strings   = guitar.strings.map(&:dup)
+      @extra_complexity = 0.0
       set_fingers(fingers) if fingers.is_a?(Array)
       yield(self) if block_given?
     end
