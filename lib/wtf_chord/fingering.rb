@@ -15,7 +15,7 @@ module WTFChord
     end
 
     def code
-      @code ||= strings.map(&:code).pack("c*")
+      strings.map(&:code).pack("c*")
     end
 
     def == other
@@ -24,6 +24,14 @@ module WTFChord
       when Array     then other == @strings.map(&:fret)
       else super
       end
+    end
+
+    def eql?(other)
+      super || self == other
+    end
+
+    def hash
+      strings.map(&:code).hash
     end
 
     def complexity
