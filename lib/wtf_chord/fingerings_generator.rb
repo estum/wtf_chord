@@ -16,10 +16,11 @@ module WTFChord
       (0...MAX_FRET).each do |from|
         to = from + MAX_DIST
         generate(from...to) do |variant|
-          fingerings << variant if filter_variant(variant)
+          fingerings << set_bass(variant) if filter_variant(variant)
         end
       end
 
+      fingerings.uniq!
       fingerings.sort_by!(&:complexity)
     end
 
@@ -63,6 +64,35 @@ module WTFChord
       while (string = fingering.used_strings[0]) && !basetone?(string)
         string.dead if !string.dead?
         break if fingering.used_strings.size == 4
+      end
+    end
+
+    def set_bass(variant)
+      if bass?
+        variant.find_used_string_for(original_bass) do |idx, bass_string|
+          try_set_bass_on(variant, idx) or begin
+            4.times do |i|
+              next if i == idx
+              if try_set_bass_on(variant, i)
+                bass_string.dead
+                break
+              end
+            end
+          end
+        end
+      end
+
+      variant
+    end
+
+    def try_set_bass_on(variant, idx)
+      bass_string = variant.strings[idx].dup
+      distance = bass_string.distance_to(bass)
+
+      if distance >= 0 && distance < 5 && (distance - variant.min_fret) > -3
+        variant.extra_complexity += 0.5 if distance < variant.min_fret
+        variant.strings[idx].hold_on(distance)
+        true
       end
     end
 

@@ -48,6 +48,13 @@ module WTFChord
       dead? ? -1 : to_i
     end
 
+    def distance_to(pitch)
+      pos = 0
+      opened = dup.open
+      pos += 1 while (opened + pos) != pitch
+      pos
+    end
+
     def <=> other
       return if dead?
       case other

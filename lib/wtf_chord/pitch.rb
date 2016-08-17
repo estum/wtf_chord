@@ -46,6 +46,10 @@ module WTFChord
       move -amount
     end
 
+    def -@
+      -to_i
+    end
+
     def to_i
       (@octave * 12) + @note.position
     end

@@ -43,6 +43,14 @@ module WTFChord
       @strings.reject(&:dead?)
     end
 
+    def find_used_string_for(note)
+      used = used_strings
+      if idx = used.index(note)
+        string = used[idx]
+        yield(strings.index(string), string)
+      end
+    end
+
     def min_fret
       holded_strings.min.fret
     end

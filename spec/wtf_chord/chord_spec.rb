@@ -40,5 +40,10 @@ describe WTFChord::Chord do
       :fingerings => [[nil, 2, 1, 2, 0, 2],
                       [nil, 2, 4, 2, 4, 2],
                       [  7, 9, 7, 8, 7, 7]]
+    },
+    "Am/G" => {
+      :steps => [0, 3, 7],
+      :notes => %w(A C E),
+      :fingerings => [[3, nil, 2, 2, 1, 0]]
     }
 end
