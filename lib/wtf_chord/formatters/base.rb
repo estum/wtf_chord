@@ -31,6 +31,10 @@ module WTFChord
       def draw
       end
 
+      def keys
+        strings.reject(&:dead?).map(&:key)
+      end
+
       def with_rates?
         !!@with_rates
       end

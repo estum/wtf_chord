@@ -12,6 +12,8 @@ module WTFChord
 
       debug { "Output using formatter: #{formatter.formatter.to_s}\n" }
 
+      options['amount'] = 1 if options['output'] == 'piano'
+
       puts chord.inspect, nil
       puts formatter[*chord.fingerings(options['amount'])] * formatter.separator
     end
