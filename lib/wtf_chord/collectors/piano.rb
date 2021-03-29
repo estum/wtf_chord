@@ -16,8 +16,11 @@ module WTFChord
         notes.each_cons(2).map { |(a, b)| (a.to_i - b.to_i).abs }
       }
 
-      FirstTone = -> (tone, notes) {
-        Distances[notes]
+      Sorting = -> (tone, notes) {
+        notes = notes.sort
+        mod = (notes[0].note.position - tone.position).abs.next
+        score = Distances[notes[1..-1]].sum
+        mod + score
       }.curry(2).freeze
 
       def collect!
@@ -28,7 +31,7 @@ module WTFChord
           combination(size).
           filter(&FilterProc[size])
         @fingerings.uniq! { |x| x.map(&:key) }
-        @fingerings.sort_by!(&FirstTone[tone])
+        @fingerings.sort_by!(&Sorting[tone])
         @fingerings
       end
     end

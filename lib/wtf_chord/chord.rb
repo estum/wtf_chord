@@ -37,7 +37,7 @@ module WTFChord
     end
 
     def size
-      bass? ? -~@notes.size : @notes.size
+      bass? ? [*@notes, bass].uniq.size : @notes.size
     end
 
     def original_bass
