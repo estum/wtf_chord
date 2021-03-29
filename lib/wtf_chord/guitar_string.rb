@@ -1,14 +1,19 @@
-require 'wtf_chord/pitch'
+# frozen_string_literal: true
+
+require 'wtf_chord/instrument_pitch'
 
 module WTFChord
-  class GuitarString < DelegateClass(WTFChord::Pitch)
+  class GuitarString < InstrumentPitch
     attr_reader :capo, :fret, :original
 
     def initialize(note, capo = 0)
-      @original = WTFChord.note(note)
       @fret = nil
       @capo = capo
-      super(@original + capo)
+      super(note)
+    end
+
+    def init_pitch
+      @original + capo
     end
 
     def initialize_dup(other)
@@ -58,8 +63,8 @@ module WTFChord
     def <=> other
       return if dead?
       case other
-      when Integer      then @fret <=> other
-      when GuitarString then @fret <=> other.fret
+      when Integer       then @fret <=> other
+      when GuitarString  then @fret <=> other.fret
       end
     end
 

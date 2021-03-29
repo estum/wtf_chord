@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'wtf_chord/note'
 require 'wtf_chord/pitch'
 require 'wtf_chord/fretboard'
@@ -30,9 +32,9 @@ module WTFChord
 
   private_constant :ScaleArray
 
-  FLAT    ||= "b".freeze
-  SHARP   ||= "#".freeze
-  SIGNS   ||= { FLAT => "\u266D".freeze, SHARP => "\u266F".freeze }.freeze
+  FLAT    ||= "b"
+  SHARP   ||= "#"
+  SIGNS   ||= { FLAT => "\u266D", SHARP => "\u266F" }.freeze
 
   DIATONIC = {
     "C" => "Do",
@@ -43,7 +45,7 @@ module WTFChord
     "A" => "La",
     "B" => "Si",
     "H" => "Si"
-  }.freeze
+  }
 
   SCALE ||= begin
     chromatic_scale = %W(
@@ -60,7 +62,7 @@ module WTFChord
       Bb|A#
       B|H
     )
-    ScaleArray.build(*chromatic_scale).freeze
+    ScaleArray.build(*chromatic_scale)
   end
 
   def self.guitar=(guitar)
@@ -69,5 +71,13 @@ module WTFChord
 
   def self.guitar
     Thread.current[:wtf_guitar] ||= Fretboard.new(*%w(E2 A2 D3 G3 B3 E4))
+  end
+
+  def self.piano=(piano)
+    Thread.current[:wtf_piano] = piano
+  end
+
+  def self.piano
+    Thread.current[:wtf_piano] ||= Keyboard.new
   end
 end

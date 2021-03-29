@@ -34,6 +34,10 @@ module WTFChord
       strings.map(&:code).hash
     end
 
+    def used_keys
+      used_strings.map(&:note).map(&:key).uniq.join
+    end
+
     def complexity
       complexity_counter.rate
     end

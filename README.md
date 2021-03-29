@@ -91,6 +91,28 @@ You can get simpler output, using the `--output` option:
     [ 10 8 7 7 6 10 ]
     [ 10 8 7 7 10 10 ]
 
+Starting with 0.7.0, we have the very nice piano formatting:
+
+    $ wtfchord Fdim -n 2 --output=piano
+    F1 - G♯1 - B1
+    ┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
+    │ │ ││ │ │ │ ││█││ │ │
+    │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
+    │  │  │  │▐▌│  │  │▐▌│
+    └──┴──┴──┴──┴──┴──┴──┘
+     ↑
+     Ⅰ
+
+
+    G♯1 - B1 - F2
+    ┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
+    │ │ ││ │ │ │ ││█││ │ │ │ ││ │ │ │ ││ ││ │ │
+    │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
+    │  │  │  │  │  │  │▐▌│  │  │  │▐▌│  │  │  │
+    └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
+     ↑                    ↑
+     Ⅰ                    Ⅱ
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec wtf_chord` to use the gem in this directory, ignoring other installed copies of this gem.

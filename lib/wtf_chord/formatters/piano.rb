@@ -1,24 +1,20 @@
 # frozen_string_literal: true
 
+require "wtf_chord/formatters/piano1"
 require "wtf_chord/keyboard"
 
 module WTFChord
   module Formatters
-    class Piano < Base
+    class Piano < Piano1
       def draw
         [
-          unique_notes.sort.join(" - "),
-          Keyboard.press(*unique_notes.map(&:position))
-        ].join("\n\n")
+          pressed_keys.map(&:to_s).join(" - "),
+          keyboard_presentation
+        ].join("\n")
       end
 
-      def unique_notes
-        strings.reject(&:dead?).each_with_object([[], []]) do |string, (positions, notes)|
-          unless positions.include?(string.note.position)
-            positions << string.note.position
-            notes << string.note
-          end
-        end[1]
+      def keyboard_presentation
+        KeyboardPresentation.press(*pressed_keys)
       end
     end
   end

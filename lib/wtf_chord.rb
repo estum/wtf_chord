@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 require "wtf_chord/scale"
 require "wtf_chord/rules"
 require "wtf_chord/version"
 
 module WTFChord
+  autoload :Fretboard, "wtf_chord/fretboard"
+  autoload :Keyboard, "wtf_chord/keyboard"
+
   DEFAULTS = {
     :rules_file => File.expand_path("../wtf_chord.yml", __FILE__)
   }.freeze

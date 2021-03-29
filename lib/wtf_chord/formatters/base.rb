@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module WTFChord
@@ -9,7 +11,7 @@ module WTFChord
       def_delegators :@fret, :strings
 
       def self.separator
-        "\n".freeze
+        "\n"
       end
 
       def self.to_proc
@@ -31,8 +33,8 @@ module WTFChord
       def draw
       end
 
-      def keys
-        strings.reject(&:dead?).map(&:key)
+      def actual_strings
+        strings.reject(&:dead?)
       end
 
       def with_rates?

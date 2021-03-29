@@ -2,6 +2,8 @@ require 'wtf_chord/formatters/base'
 
 module WTFChord
   class Formatter
+    attr_reader :name
+
     def initialize(name, with_rates = false)
       @name = name
       @with_rates = with_rates

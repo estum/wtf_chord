@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'wtf_chord/guitar_string'
 
 module WTFChord
   class Fretboard
-    DEAD = "×".freeze
+    DEAD = "×"
 
     attr_reader :strings, :capo
 
     def initialize(*strings)
       @capo    = 0
-      @strings = strings.map! { |string| GuitarString.new(string, @capo) }
+      @strings = strings.map { |string| GuitarString.new(string, @capo) }
     end
 
     def [] idx
